@@ -1,0 +1,15 @@
+# Godot 4 editor and export caches
+.godot/
+*.translation
+
+# Exported builds
+build/
+export/
+*.apk
+*.aab
+*.pck
+*.zip
+
+# OS noise
+.DS_Store
+Thumbs.db

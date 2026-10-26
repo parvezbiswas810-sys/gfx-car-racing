@@ -1,0 +1,62 @@
+[
+  {
+    "id": "car_speedster",
+    "wheelbase": 2.55,
+    "track": 1.72,
+    "length": 4.3,
+    "height": 1.02,
+    "half_length": 2.15,
+    "half_track": 0.86,
+    "wheel_radius": 0.34
+  },
+  {
+    "id": "car_phantom",
+    "wheelbase": 2.6,
+    "track": 1.76,
+    "length": 4.45,
+    "height": 1.05,
+    "half_length": 2.225,
+    "half_track": 0.88,
+    "wheel_radius": 0.34
+  },
+  {
+    "id": "car_viper",
+    "wheelbase": 2.5,
+    "track": 1.7,
+    "length": 4.2,
+    "height": 1.0,
+    "half_length": 2.1,
+    "half_track": 0.85,
+    "wheel_radius": 0.34
+  },
+  {
+    "id": "car_inferno",
+    "wheelbase": 2.58,
+    "track": 1.74,
+    "length": 4.38,
+    "height": 1.04,
+    "half_length": 2.19,
+    "half_track": 0.87,
+    "wheel_radius": 0.34
+  },
+  {
+    "id": "car_spectre",
+    "wheelbase": 2.52,
+    "track": 1.7,
+    "length": 4.25,
+    "height": 1.01,
+    "half_length": 2.125,
+    "half_track": 0.85,
+    "wheel_radius": 0.34
+  },
+  {
+    "id": "car_titan",
+    "wheelbase": 2.62,
+    "track": 1.8,
+    "length": 4.5,
+    "height": 1.08,
+    "half_length": 2.25,
+    "half_track": 0.9,
+    "wheel_radius": 0.34
+  }
+]
