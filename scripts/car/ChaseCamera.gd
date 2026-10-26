@@ -14,6 +14,10 @@ const LOOK_HEIGHT := 1.7
 @export var target: Car
 @export var shake_enabled: bool = true
 
+## The actual viewport camera. This node only positions itself; the Camera3D
+## child rides along and does the rendering.
+var camera: Camera3D
+
 var _pos_smooth := Vector3.ZERO
 var _look_smooth := Vector3.ZERO
 var _shake := 0.0
@@ -25,6 +29,18 @@ var _initialised: bool = false
 func _ready() -> void:
 	_rng.randomize()
 	shake_enabled = Settings.camera_shake
+	camera = Camera3D.new()
+	camera.name = "Camera3D"
+	camera.fov = 68.0
+	camera.near = 0.4
+	camera.far = 900.0
+	add_child(camera)
+
+
+## Makes this chase rig the active viewport camera.
+func make_current() -> void:
+	if camera != null:
+		camera.current = true
 
 
 func set_target(car: Car) -> void:

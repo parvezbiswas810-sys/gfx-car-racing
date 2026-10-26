@@ -234,7 +234,7 @@ func _draw_pedal(rect: Rect2, text: String, colour: Color, active: bool, font: F
 	draw_rect(rect, Color(colour.r, colour.g, colour.b, alpha), true)
 	draw_rect(rect, Color(colour.r, colour.g, colour.b, 0.95), false, 3.0)
 	if font != null:
-		var fs := int(rect.size.y * 0.16)
+		var fs := maxi(1, int(rect.size.y * 0.16))
 		var ts := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
 		draw_string(font, rect.get_center() + Vector2(-ts.x * 0.5, fs * 0.35), text,
 				HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(1, 1, 1, 0.92))
@@ -244,7 +244,7 @@ func _draw_small_button(rect: Rect2, text: String, active: bool, font: FontFile)
 	draw_rect(rect, Color(0.10, 0.14, 0.22, 0.65 if active else 0.45), true)
 	draw_rect(rect, Color(0.45, 0.58, 0.78, 0.85), false, 2.0)
 	if font != null:
-		var fs := int(rect.size.y * 0.34)
+		var fs := maxi(1, int(rect.size.y * 0.34))
 		var ts := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
 		draw_string(font, rect.get_center() + Vector2(-ts.x * 0.5, fs * 0.35), text,
 				HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.90, 0.94, 1.0))

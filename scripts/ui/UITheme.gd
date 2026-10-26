@@ -151,6 +151,7 @@ static func make_hbox(separation: int = 12) -> HBoxContainer:
 
 static func make_margin(left: int, top: int, right: int, bottom: int) -> MarginContainer:
 	var m := MarginContainer.new()
+	m.name = "MarginContainer"
 	m.add_theme_constant_override("margin_left", left)
 	m.add_theme_constant_override("margin_top", top)
 	m.add_theme_constant_override("margin_right", right)

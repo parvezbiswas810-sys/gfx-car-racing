@@ -98,7 +98,7 @@ func _spawn_cars() -> void:
 
 	# --- AI opponents -----------------------------------------------------
 	if mode == Mode.AI:
-		var spec: Array = Settings.CAR_SPECS
+		var spec: Array = Settings.CARS
 		for i in ai_count:
 			var idx: int = (Settings.car_index(Settings.selected_car) + i + 1) % spec.size()
 			var ai_car := _make_car("AI_%d" % (i + 1), spec[idx]["id"], spec[idx]["colour"], false)
@@ -167,7 +167,7 @@ func _build_camera() -> void:
 	_camera.name = "ChaseCamera"
 	add_child(_camera)
 	_camera.set_target(player_car)
-	_camera.current = true
+	_camera.make_current()
 	player_car.crashed.connect(func(speed: float): _camera.add_shake(clampf(speed / 40.0, 0.05, 0.6)))
 
 

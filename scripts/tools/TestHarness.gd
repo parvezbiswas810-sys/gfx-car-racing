@@ -31,7 +31,78 @@ func _ready() -> void:
 	_test_track_geometry()
 	_test_lap_rules()
 	_test_net_state_roundtrip()
+	_test_ui_screens_build()
+	_test_chase_camera()
 	_start_ai_race()
+
+
+# ---------------------------------------------------------------------------
+# 1b. UI screens
+# ---------------------------------------------------------------------------
+
+## Every screen must build its widget tree without error. The screens build
+## themselves in code, so a missing node path only surfaces at runtime: the
+## build aborts partway and leaves a near-empty tree. Counting descendants
+## catches that without assuming any particular layout.
+const UI_SCREENS := [
+	"res://scenes/ui/Splash.tscn",
+	"res://scenes/ui/MainMenu.tscn",
+	"res://scenes/ui/ModeSelect.tscn",
+	"res://scenes/ui/TrackSelect.tscn",
+	"res://scenes/ui/Garage.tscn",
+	"res://scenes/ui/Settings.tscn",
+	"res://scenes/ui/Lobby.tscn",
+	"res://scenes/ui/Results.tscn",
+]
+
+## A screen that built correctly has a backdrop plus its own controls. Anything
+## at or below this count means the build bailed out early.
+const UI_MIN_NODES := 8
+
+
+func _test_ui_screens_build() -> void:
+	print("\n[ui screens]")
+	for path in UI_SCREENS:
+		var packed: PackedScene = load(path)
+		if packed == null:
+			_fail("%s failed to load" % path)
+			continue
+		var inst: Node = packed.instantiate()
+		add_child(inst)
+		await get_tree().process_frame
+		var count := _count_descendants(inst)
+		if count < UI_MIN_NODES:
+			_fail("%s built only %d nodes (build aborted?)" % [path.get_file(), count])
+		else:
+			_pass("%s built %d nodes" % [path.get_file(), count])
+		inst.queue_free()
+		await get_tree().process_frame
+
+
+## The chase rig must own a real Camera3D, or the race renders nothing.
+func _test_chase_camera() -> void:
+	print("\n[chase camera]")
+	var rig := ChaseCamera.new()
+	add_child(rig)
+	await get_tree().process_frame
+	if rig.camera == null:
+		_fail("ChaseCamera created no Camera3D")
+	else:
+		_pass("ChaseCamera owns a Camera3D")
+		rig.make_current()
+		if rig.camera.current:
+			_pass("ChaseCamera can become the active camera")
+		else:
+			_fail("ChaseCamera did not become current")
+	rig.queue_free()
+	await get_tree().process_frame
+
+
+func _count_descendants(root: Node) -> int:
+	var total := 0
+	for child in root.get_children():
+		total += 1 + _count_descendants(child)
+	return total
 
 
 # ---------------------------------------------------------------------------

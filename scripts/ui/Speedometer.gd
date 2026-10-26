@@ -79,17 +79,20 @@ func _draw() -> void:
 	# Numeric readout
 	if font != null:
 		var speed_text := "%d" % int(round(_display_speed))
-		var text_size := font.get_string_size(speed_text, HORIZONTAL_ALIGNMENT_LEFT, -1, int(radius * 0.62))
+		var speed_px := maxi(1, int(radius * 0.62))
+		var text_size := font.get_string_size(speed_text, HORIZONTAL_ALIGNMENT_LEFT, -1, speed_px)
 		draw_string(font, centre + Vector2(-text_size.x * 0.5, radius * 0.30),
-				speed_text, HORIZONTAL_ALIGNMENT_LEFT, -1, int(radius * 0.62), Color.WHITE)
+				speed_text, HORIZONTAL_ALIGNMENT_LEFT, -1, speed_px, Color.WHITE)
 		var unit := "km/h"
-		var unit_size := regular.get_string_size(unit, HORIZONTAL_ALIGNMENT_LEFT, -1, int(radius * 0.20))
+		var unit_px := maxi(1, int(radius * 0.20))
+		var unit_size := regular.get_string_size(unit, HORIZONTAL_ALIGNMENT_LEFT, -1, unit_px)
 		draw_string(regular, centre + Vector2(-unit_size.x * 0.5, radius * 0.50),
-				unit, HORIZONTAL_ALIGNMENT_LEFT, -1, int(radius * 0.20), Color(0.65, 0.72, 0.84))
+				unit, HORIZONTAL_ALIGNMENT_LEFT, -1, unit_px, Color(0.65, 0.72, 0.84))
 
 		# Gear badge
 		var gear_text := "R" if gear == 0 else str(gear)
-		var gear_size := font.get_string_size(gear_text, HORIZONTAL_ALIGNMENT_LEFT, -1, int(radius * 0.34))
+		var gear_px := maxi(1, int(radius * 0.34))
+		var gear_size := font.get_string_size(gear_text, HORIZONTAL_ALIGNMENT_LEFT, -1, gear_px)
 		var gear_pos := centre + Vector2(-gear_size.x * 0.5, -radius * 0.18)
-		draw_string(font, gear_pos, gear_text, HORIZONTAL_ALIGNMENT_LEFT, -1, int(radius * 0.34),
+		draw_string(font, gear_pos, gear_text, HORIZONTAL_ALIGNMENT_LEFT, -1, gear_px,
 				Color(1.0, 0.80, 0.25))
